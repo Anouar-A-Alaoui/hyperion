@@ -1,4 +1,4 @@
-module https://github.com/Anouar-A-Alaoui/hyperion
+module github.com/Anouar-A-Alaoui/hyperion
 
 go 1.18
 
