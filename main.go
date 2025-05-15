@@ -239,7 +239,7 @@ func showAbout() {
 
 	Author        : Anouar AL ECHEIKH EL ALAOUI 
 	Repository    : https://github.com/Anouar-A-Alaoui/hyperion
-	Documentation : https://github.com/Anouar-A-Alaoui/hyperion
+	Documentation : https://anouar-a-alaoui.github.io/hyperion/
 
 	Use 'hyperion --help' for usage instructions.	
 	`

@@ -46,10 +46,10 @@ hyperion has many command-line options to customize its behavior:
 
 ### Path Options
 
-| Flag               | Type    | Default           | Description                      |
-|--------------------|---------|-----------------|------------------------------------|
-| `--path`           | string  | `"."`           | Root directory to scan             |
-| `--max-depth`      | int     | `-1`            | Maximum depth (-1 for unlimited)   |
+| Flag               | Type    | Default           | Description                          |
+|--------------------|---------|-------------------|--------------------------------------|
+| `--path`           | string  | `"."`             | Root directory to scan               |
+| `--max-depth`      | int     | `-1`              | Maximum depth (-1 for unlimited)     |
 
 ### Filtering Options
 
@@ -71,18 +71,18 @@ hyperion has many command-line options to customize its behavior:
 
 ### Statistics Options
 
-| Flag               | Type      | Default           | Description                       |
-|--------------------|-----------|-------------------|-----------------------------------|
-| `--show-stats`     | bool      | `false`           | Show total counts and sizes       |
-| `--stat-table`     | bool      | `false`           | Show table of largest files       |
-| `--stats-count`    | int       | `10`              | Number of files in stats table    |
-| `--chart`          | bool      | `false`           | Show file size distribution chart |
+| Flag               | Type      | Default           | Description                        |
+|--------------------|-----------|-------------------|------------------------------------|
+| `--show-stats`     | bool      | `false`           | Show total counts and sizes        |
+| `--stat-table`     | bool      | `false`           | Show table of largest files        |
+| `--stats-count`    | int       | `10`              | Number of files in stats table     |
+| `--chart`          | bool      | `false`           | Show file size distribution chart  |
 
 ### Help
 
-| Flag               | Type      | Default           | Description                       |
-|--------------------|-----------|-------------------|-----------------------------------|
-| `--help`           | bool      | `false`           | Show usage and examples           |
+| Flag               | Type      | Default           | Description                        |
+|--------------------|-----------|-------------------|------------------------------------|
+| `--help`           | bool      | `false`           | Show usage and examples            |
 
 ## Examples
 

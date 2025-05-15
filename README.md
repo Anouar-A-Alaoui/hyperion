@@ -1,4 +1,4 @@
-# hyperion
+# Hyperion
 
 A customizable directory tree visualizer written in Go.
 
