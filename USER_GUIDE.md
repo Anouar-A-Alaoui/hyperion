@@ -15,13 +15,13 @@ hyperion is a powerful command-line utility for visualizing directory structures
 The easiest way to install hyperion is using Go's installation tools:
 
 ```bash
-go install https://github.com/Anouar-A-Alaoui/hyperion@latest
+go install github.com/Anouar-A-Alaoui/hyperion@latest
 ```
 
 ### From Source
 
 ```bash
-git clone https://https://github.com/Anouar-A-Alaoui/hyperion.git
+git clone https://github.com/Anouar-A-Alaoui/hyperion.git
 cd hyperion
 make install
 ```

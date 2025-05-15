@@ -19,13 +19,13 @@ A customizable directory tree visualizer written in Go.
 ### Using Go Install
 
 ```bash
-go install https://github.com/Anouar-A-Alaoui/hyperion@latest
+go install github.com/Anouar-A-Alaoui/hyperion@latest
 ```
 
 ### Building from Source
 
 ```bash
-git clone https://https://github.com/Anouar-A-Alaoui/hyperion.git
+git clone https://github.com/Anouar-A-Alaoui/hyperion.git
 cd hyperion
 go build -o hyperion .
 ```
