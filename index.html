@@ -4,443 +4,28 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Hyperion - Modern Directory Tree Visualizer</title>
-	<style>
-		:root {
-			--primary: #3498db;
-			--secondary: #2ecc71;
-			--dark: #2c3e50;
-			--light: #ecf0f1;
-			--accent: #e74c3c;
-			--gray: #95a5a6;
-			--code-bg: #2d3436;
-		}
-		
-		* {
-			margin: 0;
-			padding: 0;
-			box-sizing: border-box;
-		}
-		
-		body {
-			font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-			line-height: 1.6;
-			color: var(--dark);
-			background-color: var(--light);
-		}
-		
-		header {
-			background: linear-gradient(135deg, var(--primary), var(--secondary));
-			color: white;
-			text-align: center;
-			padding: 3rem 2rem;
-			position: relative;
-			overflow: hidden;
-		}
-		
-		header::before {
-			content: "";
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" opacity="0.1"><path d="M0,0 L1000,0 L1000,1000 L0,1000 Z" stroke="%23ffffff" stroke-width="2" fill="none" /><path d="M100,100 L200,100 L200,200 L100,200 Z" stroke="%23ffffff" stroke-width="2" fill="none" /><path d="M300,100 L400,100 L400,200 L300,200 Z" stroke="%23ffffff" stroke-width="2" fill="none" /><path d="M500,100 L600,100 L600,200 L500,200 Z" stroke="%23ffffff" stroke-width="2" fill="none" /><path d="M200,300 L300,300 L300,400 L200,400 Z" stroke="%23ffffff" stroke-width="2" fill="none" /><path d="M400,300 L500,300 L500,400 L400,400 Z" stroke="%23ffffff" stroke-width="2" fill="none" /></svg>');
-			opacity: 0.1;
-		}
-		
-		.logo {
-			font-size: 3.5rem;
-			font-weight: 700;
-			margin-bottom: 1rem;
-			text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-		}
-		
-		.tagline {
-			font-size: 1.5rem;
-			font-weight: 300;
-			max-width: 800px;
-			margin: 0 auto 2rem;
-		}
-		
-		.cta-buttons {
-			display: flex;
-			justify-content: center;
-			gap: 1rem;
-			margin-top: 2rem;
-		}
-		
-		.btn {
-			display: inline-block;
-			padding: 0.8rem 1.6rem;
-			border-radius: 4px;
-			text-decoration: none;
-			font-weight: 600;
-			transition: all 0.3s ease;
-			border: none;
-			cursor: pointer;
-		}
-		
-		.btn-primary {
-			background-color: white;
-			color: var(--primary);
-		}
-		
-		.btn-primary:hover {
-			background-color: rgba(255,255,255,0.9);
-			transform: translateY(-2px);
-			box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-		}
-		
-		.btn-secondary {
-			background-color: transparent;
-			color: white;
-			border: 2px solid white;
-		}
-		
-		.btn-secondary:hover {
-			background-color: rgba(255,255,255,0.1);
-			transform: translateY(-2px);
-		}
-		
-		nav {
-			background-color: white;
-			box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-			position: sticky;
-			top: 0;
-			z-index: 100;
-		}
-		
-		.nav-container {
-			max-width: 1200px;
-			margin: 0 auto;
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			padding: 1rem 2rem;
-		}
-		
-		.nav-logo {
-			font-weight: 700;
-			font-size: 1.5rem;
-			color: var(--primary);
-			text-decoration: none;
-		}
-		
-		.nav-links {
-			display: flex;
-			gap: 2rem;
-		}
-		
-		.nav-link {
-			color: var(--dark);
-			text-decoration: none;
-			font-weight: 500;
-			transition: color 0.3s ease;
-		}
-		
-		.nav-link:hover {
-			color: var(--primary);
-		}
-		
-		main {
-			max-width: 1200px;
-			margin: 0 auto;
-			padding: 2rem;
-		}
-		
-		section {
-			margin-bottom: 4rem;
-		}
-		
-		h2 {
-			font-size: 2rem;
-			margin-bottom: 1.5rem;
-			color: var(--dark);
-			position: relative;
-			padding-bottom: 0.5rem;
-		}
-		
-		h2::after {
-			content: '';
-			position: absolute;
-			left: 0;
-			bottom: 0;
-			width: 100px;
-			height: 4px;
-			background: linear-gradient(90deg, var(--primary), var(--secondary));
-			border-radius: 2px;
-		}
-		
-		h3 {
-			font-size: 1.5rem;
-			margin: 2rem 0 1rem;
-			color: var(--primary);
-		}
-		
-		p {
-			margin-bottom: 1rem;
-		}
-		
-		.features {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-			gap: 2rem;
-			margin-top: 2rem;
-		}
-		
-		.feature-card {
-			background-color: white;
-			border-radius: 8px;
-			padding: 2rem;
-			box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-			transition: transform 0.3s ease, box-shadow 0.3s ease;
-		}
-		
-		.feature-card:hover {
-			transform: translateY(-5px);
-			box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-		}
-		
-		.feature-icon {
-			font-size: 2.5rem;
-			margin-bottom: 1rem;
-			color: var(--primary);
-		}
-		
-		.feature-title {
-			font-size: 1.3rem;
-			font-weight: 600;
-			margin-bottom: 0.5rem;
-		}
-		
-		pre {
-			background-color: var(--code-bg);
-			color: white;
-			padding: 1.5rem;
-			border-radius: 8px;
-			overflow-x: auto;
-			margin: 1.5rem 0;
-		}
-		
-		code {
-			font-family: 'Consolas', 'Monaco', monospace;
-			line-height: 1.4;
-		}
-		
-		.tab-container {
-			margin: 2rem 0;
-		}
-		
-		.tabs {
-			display: flex;
-			gap: 0.5rem;
-			margin-bottom: 1rem;
-			border-bottom: 2px solid var(--gray);
-			padding-bottom: 0.5rem;
-		}
-		
-		.tab {
-			padding: 0.5rem 1rem;
-			cursor: pointer;
-			border-radius: 4px 4px 0 0;
-			background-color: transparent;
-			border: none;
-			font-weight: 500;
-			transition: all 0.3s ease;
-		}
-		
-		.tab.active {
-			background-color: var(--primary);
-			color: white;
-		}
-		
-		.tab-content {
-			display: none;
-			padding: 1.5rem;
-			background-color: white;
-			border-radius: 0 0 8px 8px;
-			box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-		}
-		
-		.tab-content.active {
-			display: block;
-		}
-		
-		.installation-options {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-			gap: 2rem;
-		}
-		
-		.install-card {
-			background-color: white;
-			border-radius: 8px;
-			padding: 2rem;
-			box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-		}
-		
-		.install-icon {
-			font-size: 2rem;
-			margin-bottom: 1rem;
-			color: var(--primary);
-		}
-		
-		table {
-			width: 100%;
-			border-collapse: collapse;
-			margin: 2rem 0;
-			background-color: white;
-			box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-			border-radius: 8px;
-			overflow: hidden;
-		}
-		
-		th, td {
-			padding: 1rem;
-			text-align: left;
-			border-bottom: 1px solid var(--light);
-		}
-		
-		th {
-			background-color: var(--primary);
-			color: white;
-			font-weight: 600;
-		}
-		
-		tr:nth-child(even) {
-			background-color: rgba(0,0,0,0.02);
-		}
-		
-		tr:hover {
-			background-color: rgba(0,0,0,0.05);
-		}
-		
-		.examples {
-			display: grid;
-			grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-			gap: 2rem;
-		}
-		
-		.example-card {
-			background-color: white;
-			border-radius: 8px;
-			overflow: hidden;
-			box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-		}
-		
-		.example-header {
-			background-color: var(--primary);
-			color: white;
-			padding: 1rem;
-			font-weight: 600;
-		}
-		
-		.example-body {
-			padding: 1.5rem;
-		}
-		
-		.example-code {
-			background-color: var(--code-bg);
-			color: white;
-			padding: 1rem;
-			border-radius: 4px;
-			margin-bottom: 1rem;
-		}
-		
-		.sample-output {
-			background-color: #f8f9fa;
-			padding: 1rem;
-			border-radius: 4px;
-			font-family: 'Consolas', 'Monaco', monospace;
-			overflow-x: auto;
-			border: 1px solid #eee;
-		}
-		
-		.os-support {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			gap: 3rem;
-			margin: 2rem 0;
-		}
-		
-		.os-card {
-			text-align: center;
-			padding: 1.5rem;
-			background-color: white;
-			border-radius: 8px;
-			box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-			width: 200px;
-		}
-		
-		.os-icon {
-			font-size: 4rem;
-			margin-bottom: 1rem;
-			color: var(--dark);
-		}
-		
-		footer {
-			background-color: var(--dark);
-			color: white;
-			text-align: center;
-			padding: 3rem 2rem;
-			margin-top: 4rem;
-		}
-		
-		.footer-content {
-			max-width: 1200px;
-			margin: 0 auto;
-		}
-		
-		.footer-links {
-			display: flex;
-			justify-content: center;
-			gap: 2rem;
-			margin: 2rem 0;
-		}
-		
-		.footer-link {
-			color: white;
-			text-decoration: none;
-		}
-		
-		.footer-link:hover {
-			text-decoration: underline;
-		}
-		
-		@media (max-width: 768px) {
-			.cta-buttons {
-				flex-direction: column;
-				align-items: center;
-			}
-			
-			.nav-container {
-				flex-direction: column;
-				gap: 1rem;
-			}
-			
-			.nav-links {
-				flex-direction: column;
-				gap: 1rem;
-				text-align: center;
-			}
-			
-			.os-support {
-				flex-direction: column;
-				gap: 1.5rem;
-			}
-			
-			.os-card {
-				width: 100%;
-				max-width: 300px;
-			}
-		}
-	</style>
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 	<header>
-		<div class="logo">Hyperion</div>
+		<!-- <div class="logo">Hyperion</div> -->
+		<!-- <br> -->
+		<pre class="hyperion-logo">
+______  __                           _____              
+___  / / /____  ________________________(_)____________ 
+__  /_/ /__  / / /__  __ \  _ \_  ___/_  /_  __ \_  __ \
+_  __  / _  /_/ /__  /_/ /  __/  /   _  / / /_/ /  / / /
+/_/ /_/  _\__, / _  .___/\___//_/    /_/  \____//_/ /_/ 
+         /____/  /_/                                    
+		</pre>
+		<br> 
+		<br>
 		<p class="tagline">A powerful, customizable directory tree visualizer for Linux and Windows</p>
+		<div class="platform-badges">
+			<span class="badge"><i class="fa-brands fa-linux"></i> Linux</span>
+			<span class="badge"><i class="fa-brands fa-windows"></i> Windows</span>
+		</div>
 		<!-- <div class="cta-buttons">
 			<a href="#installation" class="btn btn-primary">Get Started</a>
 			<a href="#documentation" class="btn btn-secondary">Documentation</a>
@@ -465,15 +50,15 @@
 			<h2>About Hyperion</h2>
 			<p>Hyperion is an advanced, modern directory tree visualizer written in Go. It provides a rich set of features for visualizing directory structures with extensive customization options.</p>
 			<p>Unlike traditional tree utilities, Hyperion offers colorized output, statistical analysis, file filtering, and visual charts showing file distribution - making it perfect for both day-to-day use and detailed filesystem analysis.</p>
-			
+
 			<div class="os-support">
-				<div class="os-card">
-					<div class="os-icon">🐧</div>
+				<div class="os-card" style="height: 350px;">
+					<div class="os-icon"><i class="fa-brands fa-linux"></i></div>
 					<h3>Linux</h3>
 					<p>Full support for all Linux distributions</p>
 				</div>
-				<div class="os-card">
-					<div class="os-icon">🪟</div>
+				<div class="os-card" style="height: 350px;">
+					<div class="os-icon"><i class="fa-brands fa-windows"></i></div>
 					<h3>Windows</h3>
 					<p>Complete Windows support with automatic detection of Unicode capabilities</p>
 				</div>
@@ -484,32 +69,32 @@
 			<h2>Features</h2>
 			<div class="features">
 				<div class="feature-card">
-					<div class="feature-icon">🌲</div>
+					<div class="feature-icon"><i class="fas fa-sitemap"></i></div>
 					<h3 class="feature-title">Beautiful Tree Visualization</h3>
 					<p>Display directory structures with customizable Unicode or ASCII characters for perfect visualization on any terminal.</p>
 				</div>
 				<div class="feature-card">
-					<div class="feature-icon">🎨</div>
+					<div class="feature-icon"><i class="fas fa-palette"></i></div>
 					<h3 class="feature-title">Colorized Output</h3>
 					<p>Easily distinguish between files, directories, and symlinks with customizable colors and background highlights.</p>
 				</div>
 				<div class="feature-card">
-					<div class="feature-icon">🔍</div>
+					<div class="feature-icon"><i class="fas fa-filter"></i></div>
 					<h3 class="feature-title">Smart Filtering</h3>
 					<p>Exclude specific folders, file extensions, or exact filenames to focus on what matters in your filesystem.</p>
 				</div>
 				<div class="feature-card">
-					<div class="feature-icon">📊</div>
+					<div class="feature-icon"><i class="fas fa-chart-pie"></i></div>
 					<h3 class="feature-title">Statistics & Analysis</h3>
 					<p>Get comprehensive statistics including file counts, sizes, and type distribution with visual charts.</p>
 				</div>
 				<div class="feature-card">
-					<div class="feature-icon">📈</div>
+					<div class="feature-icon"><i class="fas fa-chart-bar"></i></div>
 					<h3 class="feature-title">Visual Charts</h3>
 					<p>Visualize file size distribution with built-in charts using Unicode block characters or ASCII.</p>
 				</div>
 				<div class="feature-card">
-					<div class="feature-icon">⚙️</div>
+					<div class="feature-icon"><i class="fas fa-sliders-h"></i></div>
 					<h3 class="feature-title">Highly Configurable</h3>
 					<p>Customize every aspect of the visualization with extensive command-line options.</p>
 				</div>
@@ -520,13 +105,13 @@
 			<h2>Installation</h2>
 			<div class="installation-options">
 				<div class="install-card">
-					<div class="install-icon">📦</div>
+					<div class="install-icon"><i class="fas fa-box"></i></div>
 					<h3>Using Go Install</h3>
 					<p>The easiest way to install Hyperion is using Go's installation tools:</p>
 					<pre><code>go install github.com/Anouar-A-Alaoui/hyperion@latest</code></pre>
 				</div>
 				<div class="install-card">
-					<div class="install-icon">💻</div>
+					<div class="install-icon"><i class="fas fa-code-branch"></i></div>
 					<h3>Building From Source</h3>
 					<p>Clone the repository and build Hyperion from source:</p>
 					<pre><code>git clone https://github.com/Anouar-A-Alaoui/hyperion.git
@@ -537,10 +122,10 @@ go build -o hyperion .</code></pre>
 			
 			<h3>Requirements</h3>
 			<ul>
-				<li>Go 1.18 or higher</li>
+				<li><i class="fas fa-check"></i> Go 1.18 or higher</li>
 			</ul>
 		</section>
-		
+		<hr>
 		<section id="usage">
 			<h2>Usage</h2>
 			<p>Hyperion offers a wide range of command-line options to customize its behavior. Here's the basic usage:</p>
@@ -951,56 +536,27 @@ go build</code></pre>
 	
 	<footer>
 		<div class="footer-content">
-			<h3>Hyperion</h3>
-			<p>A powerful, customizable directory tree visualizer for Linux and Windows</p>
+			<div class="footer-logo">
+				<pre class=" ">Hyperion</pre>
+				<p>A powerful, customizable directory tree visualizer for Linux and Windows</p>
+			</div>
 			
 			<div class="footer-links">
-				<a href="https://github.com/Anouar-A-Alaoui/hyperion" class="footer-link">GitHub</a>
-				<a href="https://github.com/Anouar-A-Alaoui/hyperion/issues" class="footer-link">Report Issues</a>
-				<a href="https://github.com/Anouar-A-Alaoui/hyperion/blob/main/LICENSE" class="footer-link">License</a>
+				<a href="https://github.com/Anouar-A-Alaoui/hyperion" class="footer-link">
+					<i class="fab fa-github"></i> GitHub
+				</a>
+				<a href="https://github.com/Anouar-A-Alaoui/hyperion/issues" class="footer-link">
+					<i class="fas fa-bug"></i> Report Issues
+				</a>
+				<a href="https://github.com/Anouar-A-Alaoui/hyperion/blob/main/LICENSE" class="footer-link">
+					<i class="fas fa-gavel"></i> License
+				</a>
 			</div>
 			
 			<p>&copy; 2025 Anouar AL ECHEIKH EL ALAOUI. Released under MIT License.</p>
 		</div>
 	</footer>
 	
-	<script>
-		function openTab(evt, tabName) {
-			var i, tabcontent, tablinks;
-			
-			// Hide all tab content
-			tabcontent = document.getElementsByClassName("tab-content");
-			for (i = 0; i < tabcontent.length; i++) {
-				tabcontent[i].classList.remove("active");
-			}
-			
-			// Remove "active" class from all tabs
-			tablinks = document.getElementsByClassName("tab");
-			for (i = 0; i < tablinks.length; i++) {
-				tablinks[i].classList.remove("active");
-			}
-			
-			// Show the current tab and add "active" class to the button that opened the tab
-			document.getElementById(tabName).classList.add("active");
-			evt.currentTarget.classList.add("active");
-		}
-		
-		// Smooth scrolling for navigation links
-		document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-			anchor.addEventListener('click', function(e) {
-				e.preventDefault();
-				
-				const targetId = this.getAttribute('href');
-				const targetElement = document.querySelector(targetId);
-				
-				if (targetElement) {
-					window.scrollTo({
-						top: targetElement.offsetTop - 80,
-						behavior: 'smooth'
-					});
-				}
-			});
-		});
-	</script>
+	<script src="./script.js"></script>
 </body>
 </html>
